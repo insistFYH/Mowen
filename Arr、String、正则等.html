@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 按total字段排序对象数组 
+        let totalSort = (arr) => {
+            let valueArr = []
+            let newArr = []
+            arr.forEach(element => {
+                valueArr.push(element.total)
+            });
+            valueArr.sort((a, b) => {
+                return a - b
+            })
+            console.log(valueArr)
+            newArr = valueArr.map((item) => {
+                return {
+                    total: item
+                }
+            })
+            console.log(newArr)
+
+        }
+        totalSort([{
+            total: 90
+        }, {
+            total: 5
+        }, {
+            total: 8
+        }, {
+            total: 20
+        }])
+
+
+        // 用正则表达式删除重复的数字 
+        let st = "11222233334555"
+        st = st.replace(/1{1,}2{1,}3{1,}45{1,}/g, '12345')
+        console.log(st)
+        document.write(str)
+
+
+        // 为string添加一个去除前后空格的方法
+        String.prototype.deleteSpace = function() {
+            let str = this
+            while (str[0] === ' ') {
+                str = str.substring(1)
+            }
+            while (str[str.length - 1] === ' ') {
+                str = str.substring(0, str.length - 1)
+            }
+            return str
+        }
+        let str = ' 456 '
+        document.write(str.deleteSpace())
+
+
+        // 分割数字，每隔三位使用逗号分隔一次，参数是Number，返回分隔后的字符串。
+        let paddingNum = (number) => {
+            let flag = number > 0 ? true : false
+            let arr = Math.abs(number).toString().split('.')
+            let left = arr[0]
+            let right = arr[1]
+
+            right = arr[1] ? '.' + right : ' '
+            let temp = ''
+            while (left.length > 3) {
+                temp = ',' + left.slice(-3) + temp
+                left = left.slice(0, -3)
+            }
+            return flag ? left + temp + right : '-' + left + temp + right
+        }
+        console.log(paddingNum(2.3)); // return '2.3' 
+        console.log(paddingNum(1234.56)); // return '1,234.56'
+        console.log(paddingNum(123456789)); // return '123,456,789' 
+        console.log(paddingNum(-987654.3)); // return '-987,654.3' 
+
+
+        // 给定长度为 n 的整数数组 nums，其中 n > 1，返回输出数组 output，其中 output[i]等于 nums 中除 nums[i] 之外其余各元素的乘积， 参数为一个整数数组， 返回一个数组 
+        let arrHandle = (arr) => {
+            let total = 1
+            arr.forEach(element => {
+                total *= element
+            });
+            let newArr = arr.map(item => {
+                return total / item
+            })
+            return newArr
+        }
+        console.log(arrHandle([1, 2, 3, 4]))
+
+
+        // 统计数组中字符出现的频次，返回一个 Object<String, Boolean> 对象， 字符为 key， 当出现两次以上将 value 置为 true， 否则为 false 
+        let countNum = (arr) => {
+            let obj = {}
+            arr.forEach(item => {
+                obj[item] = (obj[item] === undefined) ? false : true
+            })
+            return obj
+        }
+        console.log(countNum([1, 1, 'a', 'a', 'c']))
+
+        // 给定一个数组和深度n要求将数组扁平至n层 
+        let myFlat = (arr, deep) => {
+            if (deep == 0) return arr
+            let tempArr = []
+            let retArr = []
+            for (let i = 0; i <
+                arr.length; i++) {
+                if (!Array.isArray(arr[i])) {
+                    tempArr.push(arr[i])
+                } else {
+                    retArr = myFlat(arr[i],
+                        deep - 1)
+                    tempArr = tempArr.concat(retArr)
+                }
+            }
+            return tempArr
+        }
+        let arr = [1, [2, 3, 4, 5, [6, 7, 8], 9], 10]
+        console.log(myFlat(arr, 1))
+    </script>
+</body>
+
+</html>

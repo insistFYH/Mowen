@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 快速排序
+        let quickSort = (arr, l, r) => {
+            if (l >= r) return
+            let left = l
+            let right = r
+            let pivot = arr[left]
+            while (left < right) {
+                while (left < right && arr[right] >= pivot) {
+                    right--
+                }
+                if (left < right) {
+                    arr[left] = arr[right]
+                }
+                while (left < right && arr[left] <= pivot) {
+                    left++
+                }
+                if (left < right) {
+                    arr[right] = arr[left]
+                }
+                if (left >= right) {
+                    arr[left] = pivot
+                }
+            }
+            quickSort(arr, l, right - 1)
+            quickSort(arr, right + 1, r)
+            return arr
+        }
+        console.log(quickSort([9, 8, 5, 4, 6, 1, 5, 2], 0, 7))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="sr">
+    <button class="btn">节流</button>
+    <script>
+        // 函数防抖实现
+        var sr = document.querySelector('.sr')
+
+        function debounce(fn, time) {
+            let timer = ''
+            return function() {
+                if (timer) clearTimeout(timer)
+                timer = setTimeout(fn, time)
+            }
+        }
+
+        function callback() {
+            console.log("输入内容")
+        }
+        sr.addEventListener('keyup', debounce(callback, 1000))
+
+        // 函数节流实现
+        var btn = document.querySelector('.btn')
+
+        function throttle(fn, time) {
+            let lock = true
+            return function() {
+                if (lock) {
+                    lock = false
+                    setTimeout(() => {
+                        lock = true;
+                        callback2()
+                    }, time)
+                }
+            }
+        }
+
+        function callback2() {
+            console.log("点击按钮")
+        }
+        btn.addEventListener('click', throttle(callback2, 3000))
+    </script>
+</body>
+
+</html>

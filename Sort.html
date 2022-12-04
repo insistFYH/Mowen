@@ -37,7 +37,76 @@
             quickSort(arr, right + 1, r)
             return arr
         }
-        console.log(quickSort([9, 8, 5, 4, 6, 1, 5, 2], 0, 7))
+
+        // 冒泡排序
+        let bubbleSort = (arr) => {
+            let temp = ''
+            for (let i = 0; i < arr.length - 1; i++) {
+                for (let j = 0; j < arr.length - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        // 选择排序
+        let selectSort = (arr) => {
+            let minIndex = ''
+            let temp = ''
+            for (let i = 0; i < arr.length - 1; i++) {
+                minIndex = i
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[minIndex] > arr[j]) {
+                        minIndex = j
+                    }
+                }
+                if (minIndex != i) {
+                    temp = arr[i]
+                    arr[i] = arr[minIndex]
+                    arr[minIndex] = temp
+                }
+            }
+            return arr
+        }
+
+        // 归并排序
+        let mergeSort = (arr) => {
+            let length = arr.length
+            if (length < 2) return arr
+            let middle = Math.floor(length / 2)
+            let left = arr.slice(0, middle)
+            let right = arr.slice(middle)
+            return merge(mergeSort(left), mergeSort(right))
+        }
+        let merge = (left, right) => {
+            let result = []
+            while (left.length > 0 && right.length > 0) {
+                if (left[0] < right[0]) {
+                    result.push(left.shift())
+                } else {
+                    result.push(right.shift())
+                }
+            }
+            while (left.length) {
+                result.push(left.shift())
+            }
+            while (right.length) {
+                result.push(right.shift())
+            }
+            return result
+        }
+
+        function main() {
+            console.log(quickSort([9, 8, 5, 4, 6, 1, 5, 2], 0, 7))
+            console.log(bubbleSort([9, 8, 5, 4, 6, 1, 5, 2]))
+            console.log(selectSort([9, 8, 5, 4, 6, 1, 5, 2]))
+            console.log(mergeSort([9, 8, 5, 4, 6, 1, 5, 2]))
+        }
+        main()
     </script>
 </body>
 
